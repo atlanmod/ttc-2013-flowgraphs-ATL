@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<validation:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:validation="http://www.xtext.org/example/mydsl/Validation">
+  <cfNext source="&quot;testMethod()&quot;" target="&quot;int i = a * 2;&quot;"/>
+  <cfNext source="&quot;int i = a * 2;&quot;" target="&quot;i = i + 19;&quot;"/>
+  <cfNext source="&quot;i = i + 19;&quot;" target="&quot;i > a&quot;"/>
+  <cfNext source="&quot;i > a&quot;" target="&quot;a &lt; 1&quot;"/>
+  <cfNext source="&quot;i > a&quot;" target="&quot;Exit&quot;"/>
+  <cfNext source="&quot;a &lt; 1&quot;" target="&quot;return;&quot;"/>
+  <cfNext source="&quot;a &lt; 1&quot;" target="&quot;a == 1&quot;"/>
+  <cfNext source="&quot;a == 1&quot;" target="&quot;break;&quot;"/>
+  <cfNext source="&quot;break;&quot;" target="&quot;Exit&quot;"/>
+  <cfNext source="&quot;return;&quot;" target="&quot;Exit&quot;"/>
+  <cfNext source="&quot;a == 1&quot;" target="&quot;i--;&quot;"/>
+  <cfNext source="&quot;i--;&quot;" target="&quot;i > a&quot;"/>
+  <dfNext source="&quot;testMethod()&quot;" target="&quot;int i = a * 2;&quot;"/>
+  <dfNext source="&quot;testMethod()&quot;" target="&quot;i > a&quot;"/>
+  <dfNext source="&quot;testMethod()&quot;" target="&quot;a &lt; 1&quot;"/>
+  <dfNext source="&quot;testMethod()&quot;" target="&quot;a == 1&quot;"/>
+  <dfNext source="&quot;int i = a * 2;&quot;" target="&quot;i = i + 19;&quot;"/>
+  <dfNext source="&quot;i = i + 19;&quot;" target="&quot;i > a&quot;"/>
+  <dfNext source="&quot;i = i + 19;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i > a&quot;"/>
+</validation:Model>

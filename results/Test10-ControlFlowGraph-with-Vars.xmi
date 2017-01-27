@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowgraph="http://flowgraph/1.0">
+  <flowgraph:Method txt="testMethod()" cfNext="/0/@stmts.0/@expr" def="/1">
+    <stmts xsi:type="flowgraph:If" txt="if">
+      <expr txt="a &lt; 0" cfNext="/0/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@else/@stmts.0" cfPrev="/0" use="/1"/>
+      <then xsi:type="flowgraph:Block" txt="\{...\}">
+        <stmts xsi:type="flowgraph:If" txt="if">
+          <expr txt="a &lt; -10;" cfNext="/0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@then/@stmts.0/@else/@stmts.0" cfPrev="/0/@stmts.0/@expr" use="/1"/>
+          <then xsi:type="flowgraph:Block" txt="\{...\}">
+            <stmts xsi:type="flowgraph:If" txt="if">
+              <expr txt="a &lt; -100;" cfNext="/0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@then/@stmts.0 /0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@else/@stmts.0" cfPrev="/0/@stmts.0/@then/@stmts.0/@expr" use="/1"/>
+              <then xsi:type="flowgraph:Block" txt="\{...\}">
+                <stmts xsi:type="flowgraph:Return" txt="return -100;;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@expr"/>
+              </then>
+              <else xsi:type="flowgraph:Block" txt="\{...\}">
+                <stmts xsi:type="flowgraph:Return" txt="return -50;;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@expr"/>
+              </else>
+            </stmts>
+          </then>
+          <else xsi:type="flowgraph:Block" txt="\{...\}">
+            <stmts xsi:type="flowgraph:Return" txt="return -5;;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@then/@stmts.0/@expr"/>
+          </else>
+        </stmts>
+      </then>
+      <else xsi:type="flowgraph:Block" txt="\{...\}">
+        <stmts xsi:type="flowgraph:SimpleStmt" txt="a++;" cfNext="/0/@stmts.0/@else/@stmts.1/@expr" cfPrev="/0/@stmts.0/@expr" def="/1" use="/1"/>
+        <stmts xsi:type="flowgraph:If" txt="if">
+          <expr txt="a > 10" cfNext="/0/@stmts.0/@else/@stmts.1/@then /0/@stmts.0/@else/@stmts.2" cfPrev="/0/@stmts.0/@else/@stmts.0" use="/1"/>
+          <then xsi:type="flowgraph:Return" txt="return 10;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@else/@stmts.1/@expr"/>
+        </stmts>
+        <stmts xsi:type="flowgraph:Return" txt="return 5;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@else/@stmts.1/@expr"/>
+      </else>
+    </stmts>
+    <exit txt="Exit" cfPrev="/0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@then/@stmts.0 /0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@else/@stmts.0 /0/@stmts.0/@then/@stmts.0/@else/@stmts.0 /0/@stmts.0/@else/@stmts.1/@then /0/@stmts.0/@else/@stmts.2"/>
+  </flowgraph:Method>
+  <flowgraph:Param txt="a" definers="/0 /0/@stmts.0/@else/@stmts.0" users="/0/@stmts.0/@else/@stmts.1/@expr /0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@expr /0/@stmts.0/@else/@stmts.0"/>
+</xmi:XMI>

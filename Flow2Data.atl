@@ -1,0 +1,89 @@
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+
+module Flow2Data;
+create OUT: GRP refining IN: GRP;
+
+--for each FlowInstr I initialize REACHES(I) = {}
+--change = true
+--while change do begin
+--	change = false
+--	for each FlowInst I do begin
+--		oldValue = REACHES(I)
+--		REACHES(I) = U_(x in cfNext(I)) (USES(x) U (REACHES(x) - KILLS(x)))
+--		if REACHES(I) != oldValue then change = true
+--	end
+--end
+
+helper def : allInstr : Sequence(GRP!FlowInstr) = thisModule.reverse(GRP!FlowInstr.allInstances());
+
+helper def : calc(current : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)))) : 
+	Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr))) =
+		
+	let step : TupleType(changed : Boolean, next : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)))) = 
+		thisModule.allInstr->iterate(
+			currentInst;  
+			res : TupleType(changed : Boolean, next : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)))) = 
+				  Tuple{changed = false, next = current} | 
+		    let next : TupleType(changed : Boolean, next : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)))) = 
+		    	currentInst.cfNext->iterate (
+		    		successor;
+		    		res1 : TupleType(changed : Boolean, next : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)))) = 
+				  Tuple{changed = res.changed, next = res.next} |
+						
+					  let newSet : Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)) = successor.usages->union(res1.next.get(successor) - successor.kills) in
+					  if res1.next.get(currentInst).oclIsUndefined() 
+						then 
+						Tuple{changed = if res1.changed then true else newSet.notEmpty() endif,
+							next = res1.next -> including(currentInst, newSet)
+						}
+						else let tuples : Set(TupleType(var: GRP!Var, inst: GRP!FlowInstr)) = res1.next.get(currentInst) in
+						let isChanged : Boolean = if res1.changed then true else not tuples.includesAll(newSet) endif in
+						Tuple{changed = isChanged,
+							next = if isChanged then res1.next -> including(currentInst, tuples->union(newSet)) else res1.next endif}
+						endif
+				)	    
+			in  Tuple{changed = res.changed or next.changed, next = next.next}
+		)
+	in 
+		if step.changed	then thisModule.calc(step.next) else current endif;
+
+helper context GRP!FlowInstr def : usages : Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)) =
+	self.use->collect(v | Tuple{var = v, inst = self});
+
+helper context GRP!FlowInstr def : kills : Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr)) =
+	self.def->collect(v | v.users->excluding(self)->collect(i | Tuple{var = v, inst = i}))->flatten();
+
+helper def: precalc : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr))) =
+	thisModule.calc(
+		thisModule.reverse(GRP!FlowInstr.allInstances())
+		--.debug('stmts: ' + thisModule.reverse(GRP!FlowInstr.allInstances())->collect(e | e.txt))
+		->iterate(s; res : Map(GRP!FlowInstr, Set(TupleType(var : GRP!Var, inst : GRP!FlowInstr))) = 
+		Map{} | res->including(s,Set{}))
+	);
+
+helper def : reverse(seq : Sequence(OclAny)): Sequence(OclAny) = seq->iterate(e; res : Sequence(OclAny) = Sequence{} | res.prepend(e));
+
+rule SimpleStmt {
+	from
+		s: GRP!SimpleStmt
+	to
+		t: GRP!SimpleStmt (
+			dfNext <- if not thisModule.precalc.get(s).oclIsUndefined() 
+						then thisModule.precalc.get(s)->select(e | e.var = s.def->first())->collect(e | e.inst)
+						else Sequence{}
+						endif
+		)
+}
+ 
+rule Method {
+	from
+		s: GRP!Method 
+	to
+		t: GRP!Method (
+			dfNext <- s.def->collect(d | if not thisModule.precalc.get(s).oclIsUndefined() 
+						then thisModule.precalc.get(s)->select(e | e.var = d)->collect(e | e.inst)
+						else Sequence{}
+						endif)
+		)
+}
+

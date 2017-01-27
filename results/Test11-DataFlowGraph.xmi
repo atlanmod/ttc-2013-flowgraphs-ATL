@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowgraph="http://flowgraph/1.0">
+  <flowgraph:Method txt="testMethod()" cfNext="/0/@stmts.0/@expr" def="/1" dfNext="/0/@stmts.0/@then/@expr /0/@stmts.0/@then/@then/@then/@expr /0/@stmts.0/@then/@then/@expr /0/@stmts.0/@expr">
+    <stmts xsi:type="flowgraph:If" txt="if">
+      <expr txt="a &lt; 0" cfNext="/0/@stmts.0/@then/@expr /0/@stmts.1" cfPrev="/0" use="/1"/>
+      <then xsi:type="flowgraph:If" txt="if">
+        <expr txt="a &lt; -10;" cfNext="/0/@stmts.0/@then/@then/@expr /0/@stmts.1" cfPrev="/0/@stmts.0/@expr" use="/1"/>
+        <then xsi:type="flowgraph:If" txt="if">
+          <expr txt="a &lt; -100;" cfNext="/0/@stmts.0/@then/@then/@then/@expr /0/@stmts.1" cfPrev="/0/@stmts.0/@then/@expr" use="/1"/>
+          <then xsi:type="flowgraph:If" txt="if">
+            <expr txt="a &lt; -1000;" cfNext="/0/@stmts.0/@then/@then/@then/@then /0/@stmts.1" cfPrev="/0/@stmts.0/@then/@then/@expr" use="/1"/>
+            <then xsi:type="flowgraph:Return" txt="return -1001;;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@then/@then/@then/@expr"/>
+          </then>
+        </then>
+      </then>
+    </stmts>
+    <stmts xsi:type="flowgraph:Return" txt="return 1;" cfNext="/0/@exit" cfPrev="/0/@stmts.0/@expr /0/@stmts.0/@then/@expr /0/@stmts.0/@then/@then/@expr /0/@stmts.0/@then/@then/@then/@expr"/>
+    <exit txt="Exit" cfPrev="/0/@stmts.0/@then/@then/@then/@then /0/@stmts.1"/>
+  </flowgraph:Method>
+  <flowgraph:Param txt="a" definers="/0" users="/0/@stmts.0/@then/@then/@then/@expr /0/@stmts.0/@then/@then/@expr /0/@stmts.0/@then/@expr /0/@stmts.0/@expr"/>
+</xmi:XMI>

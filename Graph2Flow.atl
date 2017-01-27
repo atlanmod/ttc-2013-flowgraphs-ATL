@@ -1,0 +1,324 @@
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+
+module Graph2Flow;
+create OUT : GRP refining IN : GRP;
+
+helper context OclAny def : getMethod : GRP!Method =
+	if self.oclIsTypeOf(GRP!Method) then
+		self
+	else
+		if self.oclIsUndefined() then
+			OclUndefined
+		else
+			self.refImmediateComposite().getMethod
+		endif
+	endif;
+
+helper def : stmtsMap : Map(GRP!Method, Sequence(GRP!Stmt)) = 
+	GRP!Stmt.allInstances()->iterate(s; 
+		res : Map(GRP!Method, Sequence(GRP!Stmt)) = Map{} | 
+			if res.get(s.getMethod).oclIsUndefined()
+			then res->including(s.getMethod, Sequence{s}) 
+			else res->including(s.getMethod, res.get(s.getMethod)->append(s))
+			endif);
+
+helper context GRP!Method def : getStmts : Sequence(GRP!Stmt) =
+	thisModule.stmtsMap.get(self);
+	
+helper context OclAny def : getLoop : GRP!Loop =
+	if self.oclIsTypeOf(GRP!Loop) then
+		self
+	else
+		if self.oclIsTypeOf(GRP!Method) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getLoop
+		endif
+	endif;
+
+helper context OclAny def : isInALoop : Boolean =	
+	not self.getLoop.oclIsUndefined();
+	
+helper context OclAny def : getIf : GRP!If =
+	if self.oclIsTypeOf(GRP!If) then
+		self
+	else
+		if self.oclIsTypeOf(GRP!Method) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getIf
+		endif
+	endif;
+
+helper context OclAny def : isInAIf : Boolean =	
+	not self.getIf.oclIsUndefined();
+
+helper context GRP!Stmt def : isTheLastInIf(stmt : GRP!Stmt) : Boolean =
+	if stmt.getIf.then = self then
+		true
+	else
+		if self.getIf.then.oclIsTypeOf(GRP!Block) then
+			self.getIf.then.stmts->last() = self
+		else
+			false
+		endif
+	endif;
+
+helper context GRP!Stmt def : isTheLastInLoop(stmt : GRP!Stmt) : Boolean =
+	if stmt.getLoop.body = self then
+		true
+	else
+		if self.getLoop.body.oclIsTypeOf(GRP!Block) then
+			self.getLoop.body.stmts->last() = self
+		else
+			false
+		endif
+	endif;
+
+---starts getNext
+--block
+helper context GRP!Block def : getNext : Sequence(GRP!Item) =
+	if self.stmts->first().oclIsKindOf(GRP!FlowInstr) then
+		Sequence{self.stmts->first()}
+	else
+		self.stmts->first().getNext
+	endif;
+
+--label
+helper context GRP!Label def : getNext : Sequence(GRP!Item) =
+	if self.stmt.oclIsKindOf(GRP!FlowInstr) then
+		Sequence{self.stmt}
+	else
+		self.stmt.getNext
+	endif;
+
+--loop
+helper context GRP!Loop def : getNext : Sequence(GRP!Item) =
+	Sequence{self.expr};
+	
+--if	
+helper context GRP!If def : getNext : Sequence(GRP!Item) =
+	Sequence{self.expr};
+
+--expr in loop
+helper context GRP!Expr def : isLoopCondition : Boolean =
+	self.refImmediateComposite().oclIsTypeOf(GRP!Loop);
+
+--expr in if
+helper context GRP!Expr def : isIfCondition : Boolean =
+	self.refImmediateComposite().oclIsTypeOf(GRP!If);
+
+--get first container
+helper context GRP!Expr def : getLoopOrIfContainer : Boolean =
+	self.refImmediateComposite();
+
+helper context GRP!Expr def : getNext : Sequence(GRP!Item) =
+	if self.isLoopCondition then
+		Sequence{self.getLoopOrIfContainer.body.getNext, self.getLoopOrIfContainer.getOtherNext}->flatten()
+	else
+		if self.isIfCondition then
+			if self.getLoopOrIfContainer.else.oclIsUndefined() then
+				Sequence{
+						if self.getLoopOrIfContainer.then.oclIsKindOf(GRP!FlowInstr) then
+							self.getLoopOrIfContainer.then
+						else
+							self.getLoopOrIfContainer.then.getNext
+						endif,
+						if self.getLoopOrIfContainer.isInALoop then
+							if self.getLoopOrIfContainer.isTheLastInLoop(self.getLoop) then
+								self.getLoop.expr
+							else
+								self.getLoopOrIfContainer.getOtherNext
+							endif
+						else
+							self.getLoopOrIfContainer.getOtherNext
+						endif
+						}->flatten()
+			else
+				Sequence{
+						if self.getLoopOrIfContainer.then.oclIsKindOf(GRP!FlowInstr) then
+							self.getLoopOrIfContainer.then
+						else
+							self.getLoopOrIfContainer.then.getNext
+						endif,
+						if self.getLoopOrIfContainer.else.oclIsKindOf(GRP!FlowInstr) then
+							self.getLoopOrIfContainer.else
+						else
+							self.getLoopOrIfContainer.else.getNext
+						endif
+						}->flatten()
+			endif
+		else
+			Sequence{}
+		endif
+	endif;
+
+--method
+helper context GRP!Method def : getNext : Sequence(GRP!Item) =
+	if self.stmts->first().oclIsKindOf(GRP!FlowInstr) then
+		Sequence{self.stmts->first()}
+	else
+		self.stmts->first().getNext
+	endif;
+
+--return
+helper context GRP!Return def : getNext : Sequence(GRP!Item) =
+	Sequence{self.getMethod.exit};
+	
+--exit
+helper context GRP!Exit def : getNext : Sequence(GRP!Item) =
+	Sequence{};
+	
+--break
+helper context GRP!Break def : getNext : Sequence(GRP!Item) =
+	if self.label.oclIsUndefined() then
+		self.getLoop.getOtherNext
+	else
+		self.label.stmt.getOtherNext
+	endif;
+
+--continue
+helper context GRP!Continue def : getNext : Sequence(GRP!Item) =
+	if self.label.oclIsUndefined() then
+		Sequence{self.getLoop.expr}
+	else
+		Sequence{self.label.stmt.expr}
+	endif;
+
+--simplestmt
+helper context GRP!SimpleStmt def : getNextWithinAIf : Sequence(GRP!Item) =
+	if self.isInAIf then
+		if self.getIf.else.oclIsUndefined() then
+			if self.isTheLastInIf(self.getIf.then) then
+				self.getIf.getOtherNext
+			else
+				self.getOtherNext
+			endif
+		else
+			if self.isTheLastInIf(self.getIf.else) then
+				self.getIf.else.getOtherNext
+			else
+				self.getOtherNext
+			endif
+		endif
+	else
+		self.getOtherNext
+	endif;
+
+helper context GRP!SimpleStmt def : getNext : Sequence(GRP!Item) =
+	if self.isInALoop then
+		if self.isTheLastInLoop(self.getLoop) then
+			Sequence{self.getLoop.expr}
+		else
+			self.getNextWithinAIf
+		endif
+	else
+		self.getNextWithinAIf
+	endif;
+
+
+---end getNext
+
+---starts getOtherNext
+
+helper context GRP!If def : getOtherNext : Sequence(GRP!Item) =
+	if self.getMethod.stmts->last() = self then
+		Sequence{self.getMethod.exit}
+	else
+		if not self.else.oclIsUndefined() then
+			self.else.getOtherNext
+		else
+			self.then.getOtherNext
+		endif
+	endif;
+	
+helper context GRP!Loop def : getOtherNext : Sequence(GRP!Item) =
+	if self.getMethod.stmts->last() = self then
+		Sequence{self.getMethod.exit}
+	else
+		self.body.getOtherNext
+	endif;
+
+helper context GRP!Block def : getOtherNext : Sequence(GRP!Item) =
+	self.stmts->last().getOtherNext;
+	
+helper context GRP!FlowInstr def : getOtherNext : Sequence(GRP!Item) =	
+	let pos : Integer = self.getMethod.getStmts->indexOf(self) in
+	if self.getMethod.getStmts->size() = pos then
+		if self.getMethod.stmts->last() = self then
+			Sequence{self.getMethod.exit}
+		else
+			Sequence{}
+		endif
+	else
+		let following : GRP!Item = self.getMethod.getStmts->at(pos+1) in
+		if following.oclIsKindOf(GRP!FlowInstr) then
+			Sequence{following}
+		else
+			following.getNext
+		endif
+	endif;
+---end getOtherNext
+
+rule SimpleStmt {
+	from
+		s : GRP!SimpleStmt
+	to
+		t : GRP!SimpleStmt (
+			cfNext <- s.getNext
+		)
+}
+
+rule Expr {
+	from
+		s : GRP!Expr
+	to
+		t : GRP!Expr (
+			cfNext <- s.getNext
+		)
+}
+
+rule Exit {
+	from
+		s : GRP!Exit
+	to
+		t : GRP!Exit (
+			cfNext <- s.getNext
+		)
+}
+
+rule Method {
+	from
+		s : GRP!Method
+	to
+		t : GRP!Method (
+			cfNext <- s.getNext
+		)
+}
+
+rule Return {
+	from
+		s : GRP!Return
+	to
+		t : GRP!Return (
+			cfNext <- s.getNext
+		)
+}
+
+rule Break {
+	from
+		s : GRP!Break
+	to
+		t : GRP!Break (
+			cfNext <- s.getNext
+		)
+}
+
+rule Continue {
+	from
+		s : GRP!Continue
+	to
+		t : GRP!Continue (
+			cfNext <- s.getNext
+		)
+}

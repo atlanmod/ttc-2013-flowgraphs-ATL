@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ASCII"?>
+<validation:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:validation="http://www.xtext.org/example/mydsl/Validation">
+  <cfNext source="&quot;testMethod()&quot;" target="&quot;int i = a;&quot;"/>
+  <cfNext source="&quot;int i = a;&quot;" target="&quot;i > 0&quot;"/>
+  <cfNext source="&quot;i > 0&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;i > 0&quot;" target="&quot;return i;&quot;"/>
+  <cfNext source="&quot;i--;&quot;" target="&quot;i > 0&quot;"/>
+  <cfNext source="&quot;i > 50&quot;" target="&quot;i--;&quot;"/>
+  <cfNext source="&quot;i > 50&quot;" target="&quot;i &lt; 60&quot;"/>
+  <cfNext source="&quot;continue inner;&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;i == 50&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;i &lt; 60&quot;" target="&quot;i == 46&quot;"/>
+  <cfNext source="&quot;i &lt; 60&quot;" target="&quot;i = i - 5;&quot;"/>
+  <cfNext source="&quot;i = i - 5;&quot;" target="&quot;continue inner;&quot;"/>
+  <cfNext source="&quot;i == 46&quot;" target="&quot;i = i - 10;&quot;"/>
+  <cfNext source="&quot;i == 46&quot;" target="&quot;break outer;&quot;"/>
+  <cfNext source="&quot;continue inner;&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;i = i - 10;&quot;" target="&quot;i == 50&quot;"/>
+  <cfNext source="&quot;break outer;&quot;" target="&quot;return i;&quot;"/>
+  <cfNext source="&quot;i == 50&quot;" target="&quot;continue outer;&quot;"/>
+  <cfNext source="&quot;continue outer;&quot;" target="&quot;i > 0&quot;"/>
+  <cfNext source="&quot;return i;&quot;" target="&quot;Exit&quot;"/>
+  <dfNext source="&quot;testMethod()&quot;" target="&quot;int i = a;&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i &lt; 60&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i = i - 5;&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i == 46&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;return i;&quot;"/>
+  <dfNext source="&quot;int i = a;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i = i - 5;&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;return i;&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i == 46&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i &lt; 60&quot;"/>
+  <dfNext source="&quot;i = i - 5;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i == 46&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i &lt; 60&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;return i;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i = i - 5;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i == 50&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i == 46&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;return i;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i &lt; 60&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i = i - 5;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i--;&quot;"/>
+</validation:Model>

@@ -1,0 +1,59 @@
+-- @path VAL=/ttc-2013-flowgraphs-ATL/metamodels/Validation.ecore
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+
+module Validation;
+create OUT : VAL refining IN : VAL, IN1 : GRP;
+
+helper def : destinationFile : String = '/ttc-2013-flowgraphs-ATL/validationResult.txt';
+
+helper def : ALL_VALCFNEXTs : Sequence(VAL!CfNext) = VAL!CfNext.allInstances();
+helper def : ALL_VALDFNEXTs : Sequence(VAL!DfNext) = VAL!DfNext.allInstances();
+helper def : ALL_FLOWINSTRs : Sequence(GRP!FlowInstr) = GRP!FlowInstr.allInstances();
+
+helper def : calculateFalseLinks : Sequence(String) =
+	thisModule.ALL_FLOWINSTRs->iterate(fi ; falseLinks : Sequence(String) = Sequence{} |
+		let cfFalseLinks : Sequence(VAL!CfNext) = thisModule.ALL_VALCFNEXTs->select(vcf | vcf.source.regexReplaceAll('\"','') = fi.txt and not fi.cfNext->exists(cfn | cfn.txt = vcf.target.regexReplaceAll('\"',''))) in
+		let dfFalseLinks : Sequence(VAL!DfNext) = thisModule.ALL_VALDFNEXTs->select(vdf | vdf.source.regexReplaceAll('\"','') = fi.txt and not fi.dfNext->exists(dfn | dfn.txt = vdf.target.regexReplaceAll('\"',''))) in
+		falseLinks->union(cfFalseLinks->collect(cf | cf.source + ' --> ' + cf.target))
+					->union(dfFalseLinks->collect(df | df.source + ' --> ' + df.target))
+	);
+
+helper def : printFalseLinks : String =
+	if thisModule.calculateFalseLinks->isEmpty() then
+		'No False Links\n'
+	else
+		thisModule.calculateFalseLinks->iterate(f ; output : String = 'False Links:\n' |
+			output->concat(f + '\n')
+		)
+	endif;
+
+helper def : calculateMissingLinks : Sequence(String) =
+	thisModule.ALL_VALCFNEXTs->iterate(cf ; missingLinks : Sequence(String) = Sequence{} |
+		if thisModule.ALL_FLOWINSTRs->exists(fi | fi.txt = cf.source.regexReplaceAll('\"','') and not fi.cfNext->exists(cfn | cfn.txt = cf.target.regexReplaceAll('\"',''))) then
+			missingLinks->including(cf.source + ' --> ' + cf.target)
+		else
+			missingLinks
+		endif
+	)
+	->union(
+		thisModule.ALL_VALDFNEXTs->iterate(df ; missingLinks : Sequence(String) = Sequence{} |
+			if thisModule.ALL_FLOWINSTRs->select(fi | fi.txt = df.source.regexReplaceAll('\"','') and not fi.dfNext->exists(dfn | dfn.txt = df.target.regexReplaceAll('\"',''))) then
+				missingLinks->including(df.source + ' --> ' + df.target)
+			else
+				missingLinks
+			endif
+		)
+	);
+
+helper def : printMissingLinks : String =
+	if thisModule.calculateMissingLinks->isEmpty() then
+		'No Missing Links\n'
+	else
+		thisModule.calculateMissingLinks->iterate(f ; output : String = 'Missing Links:\n' |
+			output->concat(f + '\n')
+		)
+	endif;
+
+helper def : writeLinksInformation : String =
+	thisModule.printFalseLinks->concat('*******************\n')->concat(thisModule.printMissingLinks).debug()
+	.writeTo(thisModule.destinationFile);

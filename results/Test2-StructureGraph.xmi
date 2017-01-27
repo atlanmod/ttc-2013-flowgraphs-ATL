@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowgraph="http://flowgraph/1.0">
+  <flowgraph:Method txt="testMethod()" def="/2">
+    <stmts xsi:type="flowgraph:SimpleStmt" txt="int i = a * 2;" def="/1" use="/2"/>
+    <stmts xsi:type="flowgraph:Loop" txt="while">
+      <expr txt="i > a" use="/1 /2"/>
+      <body xsi:type="flowgraph:Block" txt="\{...\}">
+        <stmts xsi:type="flowgraph:If" txt="if">
+          <expr txt="a &lt; 1" use="/2"/>
+          <then xsi:type="flowgraph:Block" txt="\{...\}">
+            <stmts xsi:type="flowgraph:Return" txt="return;"/>
+          </then>
+          <else xsi:type="flowgraph:If" txt="if">
+            <expr txt="a == 0" use="/2"/>
+            <then xsi:type="flowgraph:Block" txt="\{...\}">
+              <stmts xsi:type="flowgraph:Continue" txt="continue;"/>
+            </then>
+          </else>
+        </stmts>
+        <stmts xsi:type="flowgraph:SimpleStmt" txt="i++;" def="/1" use="/1"/>
+      </body>
+    </stmts>
+    <exit txt="Exit"/>
+  </flowgraph:Method>
+  <flowgraph:Var txt="i" definers="/0/@stmts.0 /0/@stmts.1/@body/@stmts.1" users="/0/@stmts.1/@body/@stmts.1 /0/@stmts.1/@expr"/>
+  <flowgraph:Param txt="a" definers="/0" users="/0/@stmts.1/@body/@stmts.0/@else/@expr /0/@stmts.0 /0/@stmts.1/@expr /0/@stmts.1/@body/@stmts.0/@expr"/>
+</xmi:XMI>

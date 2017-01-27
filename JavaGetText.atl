@@ -1,0 +1,214 @@
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+-- @path JAVA=/ttc-2013-flowgraphs-ATL/metamodels/java.ecore
+
+library JavaGetText;
+---start getText helpers
+
+---start operations
+helper context JAVA!Multiplication def : getText : String =
+	'*';
+
+helper context JAVA!Division def : getText : String =
+	'/';
+
+helper context JAVA!Addition def : getText : String =
+	'+';
+
+helper context JAVA!Subtraction def : getText : String =
+	'-';
+
+helper context JAVA!PlusPlus def : getText : String =
+	'++';
+
+helper context JAVA!MinusMinus def : getText : String =
+	'--';
+
+helper context JAVA!LessThan def : getText : String =
+	'<';
+
+helper context JAVA!LessThanOrEqual def : getText : String =
+	'<=';
+
+helper context JAVA!GreaterThan def : getText : String =
+	'>';
+
+helper context JAVA!GreaterThanOrEqual def : getText : String =
+	'>=';
+
+helper context JAVA!Equal def : getText : String =
+	'==';
+
+helper context JAVA!NotEqual def : getText : String =
+	'!=';
+
+helper context JAVA!Assignment def : getText : String =
+	'=';
+---end operations
+
+---starts expressions
+helper context JAVA!EqualityExpression def : getText : String =
+	self.children->first().getText + ' ' + self.equalityOperators->first().getText + ' ' + self.children->at(2).getText;
+
+helper context JAVA!RelationExpression def : getText : String =
+	self.children->first().getText  + ' ' + self.relationOperators->first().getText + ' ' + self.children->at(2).getText;
+
+helper context JAVA!MultiplicativeExpression def : getText : String =
+	self.children->first().getText + ' ' + self.multiplicativeOperators->first().getText + ' ' + self.children->at(2).getText;
+
+helper context JAVA!AssignmentExpression def : getText : String =
+	self.child.getText + ' ' + self.assignmentOperator.getText + ' ' + self.value.getText;
+
+helper context JAVA!AdditiveExpression def : getText : String =
+	self.children->first().getText + ' ' +
+	self.additiveOperators->first().getText + ' ' +
+	self.children->at(2).getText;
+
+helper context JAVA!SuffixUnaryModificationExpression def : getText : String =
+	self.child.getText + self.operator.getText;
+---end expressions
+
+---start statements
+helper context JAVA!Block def : getText : String =
+	'\\{...\\}';
+
+helper context JAVA!WhileLoop def : getText : String =
+	'while';
+
+helper context JAVA!JumpLabel def : getText : String =
+	self.name + ':';
+
+helper context JAVA!Condition def : getText : String =
+	'if';
+
+helper context JAVA!Break def : getText : String =
+	if self.target.oclIsUndefined() then
+		'break;'
+	else
+		'break ' + self.target.name + ';'
+	endif;
+
+helper context JAVA!Continue def : getText : String =
+	if self.target.oclIsUndefined() then
+		'continue;'
+	else
+		'continue ' + self.target.name + ';'
+	endif;
+	
+helper context JAVA!Return def : getText : String =
+	if self.returnValue.oclIsUndefined() then
+		'return'
+	else
+		'return ' + self.returnValue.getText
+	endif + ';';
+
+helper context JAVA!ExpressionStatement def : getText : String =
+	self.expression.getText + ';';
+
+helper context JAVA!LocalVariableStatement def : getText : String =
+	self.variable.typeReference.getText + ' ' + 
+	self.variable.getText + ' = ' + 
+	self.variable.initialValue.getText + ';';
+---end statements
+
+---start references
+helper context JAVA!TypedElement def : getText : String =
+	self.typeReference.getText;
+
+helper context JAVA!ClassifierReference def : getText : String =
+	self.target.getText;
+
+helper context JAVA!IdentifierReference def : getText : String =
+	self.target.getText;
+
+helper context JAVA!LocalVariable def : getText : String =
+	self.name;
+
+helper context JAVA!OrdinaryParameter def : getText : String =
+	self.name;
+---end references
+
+---start types
+helper context JAVA!"Boolean" def : getText : String =
+	'boolean';
+
+helper context JAVA!Byte def : getText : String =
+	'byte';
+
+helper context JAVA!Char def : getText : String =
+	'char';
+
+helper context JAVA!Double def : getText : String =
+	'double';
+
+helper context JAVA!Float def : getText : String =
+	'float';
+
+helper context JAVA!Int def : getText : String =
+	'int';
+
+helper context JAVA!Long def : getText : String =
+	'long';
+
+helper context JAVA!Short def : getText : String =
+	'short';
+
+helper context JAVA!Void def : getText : String =
+	'void';
+---end types
+	
+---starts literals
+helper context JAVA!BooleanLiteral def : getText : String =
+	self.value;
+
+helper context JAVA!CharacterLiteral def : getText : String =
+	self.value;
+
+helper context JAVA!DecimalFloatLiteral def : getText : String =
+	self.decimalValue;
+
+helper context JAVA!HexFloatLiteral def : getText : String =
+	self.hexValue;
+
+helper context JAVA!DecimalDoubleLiteral def : getText : String =
+	self.decimalValue;
+
+helper context JAVA!HexDoubleLiteral def : getText : String =
+	self.hexValue;
+
+helper context JAVA!DecimalIntegerLiteral def : getText : String =
+	self.decimalValue;
+
+helper context JAVA!HexIntegerLiteral def : getText : String =
+	self.hexValue;
+
+helper context JAVA!OctalIntegerLiteral def : getText : String =
+	self.octalValue;
+
+helper context JAVA!DecimalLongLiteral def : getText : String =
+	self.decimalValue;
+
+helper context JAVA!HexLongLiteral def : getText : String =
+	self.hexValue;
+
+helper context JAVA!OctalLongLiteral def : getText : String =
+	self.octalValue;
+
+helper context JAVA!NullLiteral def : getText : String =
+	'null';
+
+helper context JAVA!Super def : getText : String =
+	'super';
+
+helper context JAVA!This def : getText : String =
+	'this';
+
+helper context JAVA!ClassMethod def : getText : String =
+	self.name + '()';
+
+helper context JAVA!UnaryExpression def : getText : String =
+	self.operators->first().getText + self.child.getText + ';';
+---end literals
+
+helper context OclAny def : getText : String =
+	'no text for ' + self.oclType().toString();
+---end getText helpers

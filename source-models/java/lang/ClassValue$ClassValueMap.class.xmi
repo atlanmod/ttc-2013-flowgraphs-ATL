@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="java.lang.ClassValue$ClassValueMap.java">
+  <namespaces>java</namespaces>
+  <namespaces>lang</namespaces>
+  <namespaces>ClassValue</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="ClassValueMap">
+    <members xsi:type="members:Field" name="type">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="cacheArray">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="cacheLoad">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="cacheLoadLimit">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:Field" name="INITIAL_ENTRIES">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="CACHE_LOAD_LIMIT">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="PROBE_LIMIT">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="$assertionsDisabled">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Final"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ClassValueMap">
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getCache">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <arrayDimensionsBefore/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="startEntry">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.10/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.10/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="finishEntry">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.11/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.11/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.11/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeEntry">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="changeEntry">
+      <typeReference xsi:type="types:Void"/>
+      <typeParameters name="T">
+        <extendTypes xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Object.java#//@classifiers[name='Object']"/>
+        </extendTypes>
+      </typeParameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.13/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.13/@typeParameters.0"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="loadFromCache">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="probeHomeLocation">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.15/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.15/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="probeBackupLocations">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.16/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.16/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="entryDislocation">
+      <typeReference xsi:type="types:Int"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="sizeCache">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkCacheLoad">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="reduceCacheLoad">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeStaleEntries">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="findReplacement">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeStaleEntries">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="removeStaleEntries">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addToCache">
+      <typeReference xsi:type="types:Void"/>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.25/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="addToCache">
+      <typeReference xsi:type="types:Void"/>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.26/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue.java#//@classifiers[name='ClassValue']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.26/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="placeInCache">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg3">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="overwrittenEntry">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.28/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.28/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="&lt;clinit>">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    <extends xsi:type="types:ClassifierReference">
+      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Identity.java#//@classifiers[name='ClassValue']/@members[name='Identity']"/>
+        </typeReference>
+      </typeArguments>
+      <typeArguments xsi:type="generics:QualifiedTypeArgument">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.ClassValue$Entry.java#//@classifiers[name='ClassValue']/@members[name='Entry']"/>
+        </typeReference>
+      </typeArguments>
+      <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.util.WeakHashMap.java#//@classifiers[name='WeakHashMap']"/>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

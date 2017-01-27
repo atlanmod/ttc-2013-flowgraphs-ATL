@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowgraph="http://flowgraph/1.0">
+  <flowgraph:Method txt="testMethod()" def="/1">
+    <stmts xsi:type="flowgraph:If" txt="if">
+      <expr txt="a &lt; 0" use="/1"/>
+      <then xsi:type="flowgraph:Block" txt="\{...\}">
+        <stmts xsi:type="flowgraph:If" txt="if">
+          <expr txt="a &lt; -10;" use="/1"/>
+          <then xsi:type="flowgraph:Block" txt="\{...\}">
+            <stmts xsi:type="flowgraph:If" txt="if">
+              <expr txt="a &lt; -100;" use="/1"/>
+              <then xsi:type="flowgraph:Block" txt="\{...\}">
+                <stmts xsi:type="flowgraph:Return" txt="return -100;;"/>
+              </then>
+              <else xsi:type="flowgraph:Block" txt="\{...\}">
+                <stmts xsi:type="flowgraph:Return" txt="return -50;;"/>
+              </else>
+            </stmts>
+          </then>
+          <else xsi:type="flowgraph:Block" txt="\{...\}">
+            <stmts xsi:type="flowgraph:Return" txt="return -5;;"/>
+          </else>
+        </stmts>
+      </then>
+      <else xsi:type="flowgraph:Block" txt="\{...\}">
+        <stmts xsi:type="flowgraph:SimpleStmt" txt="a++;" def="/1" use="/1"/>
+        <stmts xsi:type="flowgraph:If" txt="if">
+          <expr txt="a > 10" use="/1"/>
+          <then xsi:type="flowgraph:Return" txt="return 10;"/>
+        </stmts>
+        <stmts xsi:type="flowgraph:Return" txt="return 5;"/>
+      </else>
+    </stmts>
+    <exit txt="Exit"/>
+  </flowgraph:Method>
+  <flowgraph:Param txt="a" definers="/0 /0/@stmts.0/@else/@stmts.0" users="/0/@stmts.0/@else/@stmts.1/@expr /0/@stmts.0/@then/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@then/@stmts.0/@expr /0/@stmts.0/@expr /0/@stmts.0/@else/@stmts.0"/>
+</xmi:XMI>

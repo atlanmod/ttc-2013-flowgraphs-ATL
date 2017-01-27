@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="ASCII"?>
+<containers:CompilationUnit xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:generics="http://www.emftext.org/java/generics" xmlns:members="http://www.emftext.org/java/members" xmlns:modifiers="http://www.emftext.org/java/modifiers" xmlns:parameters="http://www.emftext.org/java/parameters" xmlns:types="http://www.emftext.org/java/types" xsi:schemaLocation="http://www.emftext.org/java/classifiers ../../java.ecore#/2 http://www.emftext.org/java/containers ../../java.ecore#/4 http://www.emftext.org/java/generics ../../java.ecore#/6 http://www.emftext.org/java/members ../../java.ecore#/10 http://www.emftext.org/java/modifiers ../../java.ecore#/11 http://www.emftext.org/java/parameters ../../java.ecore#/13 http://www.emftext.org/java/types ../../java.ecore#/16" name="sun.reflect.ReflectionFactory.java">
+  <namespaces>sun</namespaces>
+  <namespaces>reflect</namespaces>
+  <classifiers xsi:type="classifiers:Class" name="ReflectionFactory">
+    <members xsi:type="members:Field" name="initted">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="reflectionFactoryAccessPerm">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.security.Permission.java#//@classifiers[name='Permission']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="soleInstance">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.ReflectionFactory.java#//@classifiers[name='ReflectionFactory']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="langReflectAccess">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.LangReflectAccess.java#//@classifiers[name='LangReflectAccess']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+      <annotationsAndModifiers xsi:type="modifiers:Volatile"/>
+    </members>
+    <members xsi:type="members:Field" name="noInflation">
+      <typeReference xsi:type="types:Boolean"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Field" name="inflationThreshold">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:Constructor" name="ReflectionFactory"/>
+    <members xsi:type="members:ClassMethod" name="getReflectionFactory">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.ReflectionFactory.java#//@classifiers[name='ReflectionFactory']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setLangReflectAccess">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.LangReflectAccess.java#//@classifiers[name='LangReflectAccess']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newFieldAccessor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.FieldAccessor.java#//@classifiers[name='FieldAccessor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Field.java#//@classifiers[name='Field']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:Boolean"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newMethodAccessor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.MethodAccessor.java#//@classifiers[name='MethodAccessor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newConstructorAccessor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.ConstructorAccessor.java#//@classifiers[name='ConstructorAccessor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newField">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Field.java#//@classifiers[name='Field']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.String.java#//@classifiers[name='String']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg3">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg4">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg5">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.String.java#//@classifiers[name='String']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:VariableLengthParameter" name="arg6">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newMethod">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.String.java#//@classifiers[name='String']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg3">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg4">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg5">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg6">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg7">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.String.java#//@classifiers[name='String']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg8">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg9">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:VariableLengthParameter" name="arg10">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newConstructor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg2">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg3">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg4">
+        <typeReference xsi:type="types:Int"/>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg5">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.String.java#//@classifiers[name='String']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg6">
+        <typeReference xsi:type="types:Byte"/>
+        <arrayDimensionsBefore/>
+      </parameters>
+      <parameters xsi:type="parameters:VariableLengthParameter" name="arg7">
+        <typeReference xsi:type="types:Byte"/>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getMethodAccessor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.MethodAccessor.java#//@classifiers[name='MethodAccessor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setMethodAccessor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.MethodAccessor.java#//@classifiers[name='MethodAccessor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getConstructorAccessor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.ConstructorAccessor.java#//@classifiers[name='ConstructorAccessor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="setConstructorAccessor">
+      <typeReference xsi:type="types:Void"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.ConstructorAccessor.java#//@classifiers[name='ConstructorAccessor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="copyMethod">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Method.java#//@classifiers[name='Method']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="copyField">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Field.java#//@classifiers[name='Field']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Field.java#//@classifiers[name='Field']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="copyConstructor">
+      <typeReference xsi:type="types:ClassifierReference">
+        <typeArguments xsi:type="generics:QualifiedTypeArgument">
+          <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.21/@typeParameters.0"/>
+        </typeArguments>
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+      </typeReference>
+      <typeParameters name="T"/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <typeArguments xsi:type="generics:QualifiedTypeArgument">
+            <typeReference xsi:type="types:ClassifierReference" target="//@classifiers.0/@members.21/@typeParameters.0"/>
+          </typeArguments>
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="getExecutableTypeAnnotationBytes">
+      <typeReference xsi:type="types:Byte"/>
+      <arrayDimensionsBefore/>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Executable.java#//@classifiers[name='Executable']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="newConstructorForSerialization">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+      </typeReference>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg0">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Class.java#//@classifiers[name='Class']"/>
+        </typeReference>
+      </parameters>
+      <parameters xsi:type="parameters:OrdinaryParameter" name="arg1">
+        <typeReference xsi:type="types:ClassifierReference">
+          <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.reflect.Constructor.java#//@classifiers[name='Constructor']"/>
+        </typeReference>
+      </parameters>
+      <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="inflationThreshold">
+      <typeReference xsi:type="types:Int"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="checkInitted">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="langReflectAccess">
+      <typeReference xsi:type="types:ClassifierReference">
+        <target xsi:type="classifiers:Class" href="pathmap:/javaclass/sun.reflect.LangReflectAccess.java#//@classifiers[name='LangReflectAccess']"/>
+      </typeReference>
+      <annotationsAndModifiers xsi:type="modifiers:Private"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <members xsi:type="members:ClassMethod" name="&lt;clinit>">
+      <typeReference xsi:type="types:Void"/>
+      <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    </members>
+    <annotationsAndModifiers xsi:type="modifiers:Public"/>
+    <annotationsAndModifiers xsi:type="modifiers:Synchronized"/>
+    <annotationsAndModifiers xsi:type="modifiers:Static"/>
+    <extends xsi:type="types:ClassifierReference">
+      <target xsi:type="classifiers:Class" href="pathmap:/javaclass/java.lang.Object.java#//@classifiers[name='Object']"/>
+    </extends>
+  </classifiers>
+</containers:CompilationUnit>

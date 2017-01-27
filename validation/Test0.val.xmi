@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ASCII"?>
+<validation:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:validation="http://www.xtext.org/example/mydsl/Validation">
+  <cfNext source="&quot;testMethod()&quot;" target="&quot;int a = 1;&quot;"/>
+  <cfNext source="&quot;int a = 1;&quot;" target="&quot;int b = 2;&quot;"/>
+  <cfNext source="&quot;int b = 2;&quot;" target="&quot;int c = a + b;&quot;"/>
+  <cfNext source="&quot;int c = a + b;&quot;" target="&quot;a = c;&quot;"/>
+  <cfNext source="&quot;a = c;&quot;" target="&quot;b = a;&quot;"/>
+  <cfNext source="&quot;b = a;&quot;" target="&quot;c = a / b;&quot;"/>
+  <cfNext source="&quot;c = a / b;&quot;" target="&quot;b = a - b;&quot;"/>
+  <cfNext source="&quot;b = a - b;&quot;" target="&quot;return b * c;&quot;"/>
+  <cfNext source="&quot;return b * c;&quot;" target="&quot;Exit&quot;"/>
+  <dfNext source="&quot;int a = 1;&quot;" target="&quot;int c = a + b;&quot;"/>
+  <dfNext source="&quot;int b = 2;&quot;" target="&quot;int c = a + b;&quot;"/>
+  <dfNext source="&quot;int c = a + b;&quot;" target="&quot;a = c;&quot;"/>
+  <dfNext source="&quot;a = c;&quot;" target="&quot;b = a;&quot;"/>
+  <dfNext source="&quot;a = c;&quot;" target="&quot;c = a / b;&quot;"/>
+  <dfNext source="&quot;a = c;&quot;" target="&quot;b = a - b;&quot;"/>
+  <dfNext source="&quot;b = a;&quot;" target="&quot;c = a / b;&quot;"/>
+  <dfNext source="&quot;b = a;&quot;" target="&quot;b = a - b;&quot;"/>
+  <dfNext source="&quot;c = a / b;&quot;" target="&quot;return b * c;&quot;"/>
+  <dfNext source="&quot;b = a - b;&quot;" target="&quot;return b * c;&quot;"/>
+</validation:Model>

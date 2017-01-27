@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:flowgraph="http://flowgraph/1.0">
+  <flowgraph:Method txt="testMethod()" def="/1">
+    <stmts xsi:type="flowgraph:If" txt="if">
+      <expr txt="a &lt; 0" use="/1"/>
+      <then xsi:type="flowgraph:If" txt="if">
+        <expr txt="a &lt; -10;" use="/1"/>
+        <then xsi:type="flowgraph:If" txt="if">
+          <expr txt="a &lt; -100;" use="/1"/>
+          <then xsi:type="flowgraph:If" txt="if">
+            <expr txt="a &lt; -1000;" use="/1"/>
+            <then xsi:type="flowgraph:Return" txt="return -1001;;"/>
+          </then>
+        </then>
+      </then>
+    </stmts>
+    <stmts xsi:type="flowgraph:Return" txt="return 1;"/>
+    <exit txt="Exit"/>
+  </flowgraph:Method>
+  <flowgraph:Param txt="a" definers="/0" users="/0/@stmts.0/@then/@then/@then/@expr /0/@stmts.0/@then/@then/@expr /0/@stmts.0/@then/@expr /0/@stmts.0/@expr"/>
+</xmi:XMI>

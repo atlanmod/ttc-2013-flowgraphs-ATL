@@ -1,0 +1,133 @@
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+-- @path JAVA=/ttc-2013-flowgraphs-ATL/metamodels/java.ecore
+
+module Java2Graph;
+create OUT : GRP from IN : JAVA;
+
+uses JavaGetText;
+
+rule ClassMethod2Method {
+	from
+		s : JAVA!ClassMethod
+	to
+		t : GRP!Method (
+			txt <- s.getText,
+			stmts <- s.statements,
+			exit <- exit
+		),
+		exit : GRP!Exit (
+			txt <- 'Exit'
+		)
+}
+
+rule Statement2SimpleStmt {
+	from
+		s : JAVA!Statement (not s.oclIsTypeOf(JAVA!Condition) and
+			not s.oclIsTypeOf(JAVA!WhileLoop) and
+			not s.oclIsTypeOf(JAVA!Block) and
+			not s.oclIsTypeOf(JAVA!Class) and
+			not s.oclIsTypeOf(JAVA!JumpLabel) and
+			not s.oclIsKindOf(JAVA!Jump) and
+			not s.oclIsTypeOf(JAVA!Return))
+	to
+		t : GRP!SimpleStmt (
+			txt <- s.getText
+		)
+}
+
+rule Block2Block {
+	from
+		s : JAVA!Block
+	to
+		t : GRP!Block (
+			stmts <- s.statements,
+			txt <- s.getText	
+		)
+}
+
+rule Condition2If {
+	from
+		s : JAVA!Condition
+	to
+		t : GRP!If (
+			expr <- s.condition,
+			then <- s.statement,
+			else <- s.elseStatement,
+			txt <- s.getText
+		)
+}
+
+rule EqualityExpression2Expr {
+	from
+		s : JAVA!EqualityExpression
+	to
+		t : GRP!Expr (
+			txt <- s.getText	
+		)
+}
+
+rule RelationExpression2Expr {
+	from
+		s : JAVA!RelationExpression
+	to
+		t : GRP!Expr (
+			txt <- s.getText	
+		)
+}
+
+rule WhileLoop2Loop {
+	from
+		s : JAVA!WhileLoop
+	to
+		t : GRP!Loop (
+			expr <- s.condition,
+			body <- s.statement,
+			txt <- s.getText
+		)
+}
+
+abstract rule Jump2JumpStmt {
+	from
+		s : JAVA!Jump
+	to
+		t : GRP!JumpStmt (
+			label <- s.target
+		)
+}
+
+rule JumpLabel2Label {
+	from
+		s : JAVA!JumpLabel
+	to
+		t : GRP!Label (
+			stmt <- s.statement,
+			txt <- s.getText
+		)
+}
+
+rule Continue2Continue extends Jump2JumpStmt {
+	from
+		s : JAVA!Continue
+	to
+		t : GRP!Continue (
+			txt <- s.getText	
+		)
+}
+
+rule Break2Break extends Jump2JumpStmt {
+	from
+		s : JAVA!Break
+	to
+		t : GRP!Break (
+			txt <- s.getText	
+		)
+}
+
+rule Return2Return {
+	from
+		s : JAVA!Return
+	to
+		t : GRP!Return (
+			txt <- s.getText	
+		)
+}

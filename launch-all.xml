@@ -1,0 +1,87 @@
+<!-- How to configure this ant script:
+	Run as->Ant Build...
+		Set:
+			- Run in same JRE
+-->
+
+<project name="Java2Graph" default="transformAll">
+
+	<loadproperties srcfile="./launch-all.properties" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="lib/ant-contrib-1.0b3.jar" />
+
+	<target name="transformAll">
+		<atl.loadModel modelHandler="EMF" name="JAVA" metamodel="MOF" path="${Metamodel.folder}/java.ecore" />
+		<atl.loadModel modelHandler="EMF" name="GRP" metamodel="MOF" path="${Metamodel.folder}/FlowGraph.ecore" />
+		<atl.loadModel modelHandler="EMF" name="VAL" metamodel="MOF" path="${Metamodel.folder}/Validation.ecore" />
+
+		<!-- Generate java models from java files -->
+		<java jar="${Lib.folder}/jamoppc.jar" failonerror="true" fork="true">
+			<arg value="--disable-layout" />
+			<arg value="${Files.folder}/" />
+			<arg value="${Source.folder}/" />
+		</java>
+
+		<!-- Loops over the input java models -->
+		<for param="currentFile">
+			<path>
+				<fileset dir="${Source.folder}" includes="*.java.xmi" />
+			</path>
+			<sequential>
+				<basename file="@{currentFile}" property="base@{currentFile}" suffix=".java.xmi" />
+
+				<antcall target="transform" inheritrefs="true">
+					<param name="baseName" value="${base@{currentFile}}" />
+				</antcall>
+			</sequential>
+		</for>
+	</target>
+
+	<!-- Transformation chain -->
+	<target name="transform">
+		<echo message="Transforming ${baseName}" />
+		<atl.loadModel modelHandler="EMF" name="inJ2GModel" metamodel="JAVA" path="${Source.folder}/${baseName}.java.xmi" />
+
+		<!-- Java2Graph_transformation -->
+		<atl.launch path="${Project.root}/Java2Graph.asm">
+			<inModel name="IN" model="inJ2GModel" />
+			<outModel name="OUT" model="outJ2GModel" metamodel="GRP" />
+			<library name="JavaGetText" path="${Project.root}/JavaGetText.asm"/>
+			<superimpose path="${Project.root}/Java2GraphWithVars.asm"/>
+		</atl.launch>
+		<atl.saveModel model="outJ2GModel" path="${Model.folder}/${baseName}-StructureGraph.xmi" />
+
+		<!-- Graph2Flow_transformation -->
+		<atl.launch path="${Project.root}/Graph2Flow.asm" refining="true">
+			<inModel name="IN" model="outJ2GModel" />
+		</atl.launch>
+		<atl.saveModel model="outJ2GModel" path="${Model.folder}/${baseName}-ControlFlowGraph-with-Vars.xmi" />
+
+		<!-- Flow2Data_transformation -->
+		<atl.launch path="${Project.root}/Flow2Data.asm" refining="true">
+			<inModel name="IN" model="outJ2GModel" />
+		</atl.launch>
+		<atl.saveModel model="outJ2GModel" path="${Model.folder}/${baseName}-DataFlowGraph.xmi" />
+
+		<!-- Graph validation -->
+		<if>
+			<available file="${Val.folder}/${baseName}.val" />
+			<then>
+				<java jar="${Lib.folder}/validation-xtext-injector.jar" failonerror="true" fork="true">
+					<arg value="${Val.folder}/${baseName}.val" />
+				</java>
+				<atl.loadModel modelHandler="EMF" name="valModel" metamodel="VAL" path="${Val.folder}/${baseName}.val.xmi" />
+				<atl.launch path="${Project.root}/Validation.asm" refining="true">
+					<inModel name="IN" model="valModel" />
+					<inModel name="IN1" model="outJ2GModel" />
+				</atl.launch>
+				<move file="validationResult.txt" tofile="${Val.folder}/${baseName}.result" />
+			</then>
+		</if>
+	</target>
+
+</project>
+
+
+
+

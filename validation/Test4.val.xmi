@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<validation:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:validation="http://www.xtext.org/example/mydsl/Validation">
+  <cfNext source="&quot;testMethod()&quot;" target="&quot;int i = 100;&quot;"/>
+  <cfNext source="&quot;int i = 100;&quot;" target="&quot;i > 0&quot;"/>
+  <cfNext source="&quot;i > 0&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;i > 0&quot;" target="&quot;Exit&quot;"/>
+  <cfNext source="&quot;i > 50&quot;" target="&quot;i = i - 10;&quot;"/>
+  <cfNext source="&quot;i > 50&quot;" target="&quot;i--;&quot;"/>
+  <cfNext source="&quot;i = i - 10;&quot;" target="&quot;i == 50&quot;"/>
+  <cfNext source="&quot;i == 50&quot;" target="&quot;break;&quot;"/>
+  <cfNext source="&quot;i == 50&quot;" target="&quot;i > 50&quot;"/>
+  <cfNext source="&quot;break;&quot;" target="&quot;i--;&quot;"/>
+  <cfNext source="&quot;i--;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;int i = 100;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;int i = 100;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;int i = 100;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;int i = 100;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i == 50&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i = i - 10;&quot;"/>
+  <dfNext source="&quot;i = i - 10;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i > 50&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i--;&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i > 0&quot;"/>
+  <dfNext source="&quot;i--;&quot;" target="&quot;i = i - 10;&quot;"/>
+</validation:Model>

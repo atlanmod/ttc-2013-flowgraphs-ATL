@@ -1,0 +1,183 @@
+-- @path GRP=/ttc-2013-flowgraphs-ATL/metamodels/FlowGraph.ecore
+-- @path JAVA=/ttc-2013-flowgraphs-ATL/metamodels/java.ecore
+
+module Java2Graph;
+create OUT : GRP from IN : JAVA;
+
+uses JavaGetText;
+
+helper context OclAny def : getMethod : JAVA!ClassMethod =
+	if self.oclIsTypeOf(JAVA!ClassMethod) then
+		self
+	else
+		if self.oclIsTypeOf(JAVA!CompilationUnit) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getMethod
+		endif
+	endif;
+
+helper context OclAny def : getStatement : JAVA!Statement =
+	if self.oclIsKindOf(JAVA!Statement) then
+		self
+	else
+		if self.oclIsTypeOf(JAVA!ClassMethod) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getStatement
+		endif
+	endif;
+
+helper context OclAny def : getLocalVariableStatement : JAVA!LocalVariableStatement =
+	if self.oclIsTypeOf(JAVA!LocalVariableStatement) then
+		self
+	else
+		if self.oclIsTypeOf(JAVA!ClassMethod) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getLocalVariableStatement
+		endif
+	endif;
+
+helper context OclAny def : isInLocalVariableStatement : Boolean =
+	not self.getLocalVariableStatement.oclIsUndefined();
+
+helper context OclAny def : getReturn : Boolean =
+	if self.oclIsTypeOf(JAVA!Return) then
+		self
+	else
+		if self.oclIsTypeOf(JAVA!ClassMethod) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getReturn
+		endif
+	endif;
+
+helper context OclAny def : isInReturn : Boolean =
+	not self.getReturn.oclIsUndefined();
+
+helper context JAVA!IdentifierReference def : isAloneInReturn : Boolean =
+	if self.isInReturn then
+		self.getReturn.returnValue = self
+	else
+		false
+	endif;
+
+helper context OclAny def : isInConditionalExpressionChild : Boolean =
+	if self.oclIsKindOf(JAVA!ConditionalExpressionChild) and not self.oclIsTypeOf(JAVA!IdentifierReference) then
+		true
+	else
+		if self.oclIsKindOf(JAVA!Statement) then
+			false
+		else
+			self.refImmediateComposite().isInConditionalExpressionChild
+		endif
+	endif;
+
+helper context OclAny def : getAssignmentExpression : JAVA!AssignmentExpression =
+	if self.oclIsKindOf(JAVA!AssignmentExpression) then
+		self
+	else
+		if self.oclIsKindOf(JAVA!Statement) then
+			OclUndefined
+		else
+			self.refImmediateComposite().getAssignmentExpression
+		endif
+	endif;
+
+helper context OclAny def : isInAssignmentExpression : Boolean =
+	not self.getAssignmentExpression.oclIsUndefined();
+
+helper context JAVA!IdentifierReference def : isInLeftInAssignment : Boolean =
+	if self.isInAssignmentExpression then
+		self.getAssignmentExpression.child = self
+	else
+		false
+	endif;
+
+helper context JAVA!IdentifierReference def : isInRightAssignment : Boolean =
+	if self.isInAssignmentExpression then
+		self.isInExpression(self.getAssignmentExpression.value)
+	else
+		false
+	endif;
+
+helper context JAVA!IdentifierReference def : isInInitialValueOfLocalVariableStatement : Boolean =
+	if self.isInLocalVariableStatement then
+		self.isInExpression(self.getLocalVariableStatement.variable.initialValue)
+	else
+		false
+	endif;
+
+helper context OclAny def : isInUnaryModificationExpression : Boolean  =
+	if self.oclIsKindOf(JAVA!UnaryModificationExpression) then
+		true
+	else
+		if self.oclIsKindOf(JAVA!Statement) then
+			false
+		else
+			self.refImmediateComposite().isInUnaryModificationExpression
+		endif
+	endif;
+
+helper context OclAny def : isInExpression(expr : JAVA!Expression) : Boolean =
+	if self.oclIsKindOf(JAVA!Expression) then
+		if self = expr then
+			true
+		else
+			self.refImmediateComposite().isInExpression(expr)
+		endif
+	else
+		if self.oclIsKindOf(JAVA!Statement) then
+			false
+		else
+			self.refImmediateComposite().isInExpression(expr)
+		endif
+	endif;
+
+helper def : allIdentifiers : Sequence(JAVA!IdentifierReference) = JAVA!IdentifierReference.allInstances();
+
+helper context JAVA!Variable def : getIdentifierReferences : Sequence(JAVA!IdentifierReference) =
+	thisModule.allIdentifiers->select(idref | idref.target = self);
+
+helper context JAVA!Variable def : getDefiners : Sequence(OclAny) =
+	self.getIdentifierReferences
+		->select(idref | idref.isInLeftInAssignment
+			or idref.isInUnaryModificationExpression)
+		->collect(idref | idref.getStatement);
+
+helper context JAVA!Variable def : getUsers : Sequence(OclAny) = 
+	self.getIdentifierReferences->select(idref | idref.isInRightAssignment 
+					or idref.isInUnaryModificationExpression
+					or idref.isInConditionalExpressionChild
+					or idref.isInInitialValueOfLocalVariableStatement
+					or idref.isAloneInReturn)
+				->collect(idref | 
+					if idref.getStatement.oclIsKindOf(JAVA!WhileLoop) or idref.getStatement.oclIsKindOf(JAVA!Conditional) then
+						idref.getStatement.condition
+					else
+						idref.getStatement																			
+					endif
+				)->asSet()->asSequence();
+
+rule LocalVariableStatement2Var {
+	from
+		s : JAVA!LocalVariable
+	to
+		t : GRP!Var (
+			txt <- s.getText,
+			definers <- Sequence{s.getLocalVariableStatement}->union(s.getDefiners),
+			users <- s.getUsers																	
+		)
+}
+
+rule OrdinaryParameter2Var {
+	from
+		s : JAVA!OrdinaryParameter
+	to
+		t : GRP!Param (
+			txt <- s.getText,
+			definers <- Sequence{s.getMethod}->union(s.getDefiners),
+			users <- s.getUsers						
+		)
+}	
